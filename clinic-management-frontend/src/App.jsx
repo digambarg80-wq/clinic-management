@@ -13,28 +13,30 @@ import AppointmentList from './components/appointments/AppointmentList'
 import AddAppointment from './components/appointments/AddAppointment'
 import DoctorList from './components/doctors/DoctorList'
 import AddDoctor from './components/doctors/AddDoctor'
-
-// New imports
 import BillingDashboard from './components/billing/BillingDashboard'
 import CreateInvoice from './components/billing/CreateInvoice'
-import InsuranceClaims from './components/billing/InsuranceClaims'
-import PrescriptionList from './components/prescriptions/PrescriptionList'
-import MedicineInventory from './components/pharmacy/MedicineInventory'
-import NotificationCenter from './components/notifications/NotificationCenter'
-import AnalyticsDashboard from './components/reports/AnalyticsDashboard'
 import NotFound from './pages/NotFound'
 
 function App() {
   return (
     <Router>
       <AuthProvider>
-        <Toaster position="top-right" />
+        <Toaster 
+          position="top-right"
+          toastOptions={{
+            duration: 3000,
+            style: {
+              background: '#363636',
+              color: '#fff',
+            },
+          }}
+        />
         <Routes>
-          {/* Auth Routes */}
+          {/* Public Routes */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           
-          {/* Main Routes */}
+          {/* Protected Routes */}
           <Route path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
           
           {/* Patient Routes */}
@@ -53,20 +55,6 @@ function App() {
           {/* Billing Routes */}
           <Route path="/billing" element={<PrivateRoute><BillingDashboard /></PrivateRoute>} />
           <Route path="/billing/create" element={<PrivateRoute><CreateInvoice /></PrivateRoute>} />
-          <Route path="/billing/claims" element={<PrivateRoute><InsuranceClaims /></PrivateRoute>} />
-          
-          {/* Prescription Routes */}
-          <Route path="/prescriptions" element={<PrivateRoute><PrescriptionList /></PrivateRoute>} />
-          
-          {/* Pharmacy Routes */}
-          <Route path="/pharmacy" element={<PrivateRoute><MedicineInventory /></PrivateRoute>} />
-          
-          {/* Notification Routes */}
-          <Route path="/notifications" element={<PrivateRoute><NotificationCenter /></PrivateRoute>} />
-          
-          {/* Reports & Analytics Routes */}
-          <Route path="/reports" element={<PrivateRoute><AnalyticsDashboard /></PrivateRoute>} />
-          <Route path="/analytics" element={<PrivateRoute><AnalyticsDashboard /></PrivateRoute>} />
           
           {/* 404 Route */}
           <Route path="/404" element={<NotFound />} />
